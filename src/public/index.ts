@@ -1,8 +1,10 @@
-const ws = new WebSocket('ws://localhost:5501');
+const ws = new WebSocket(`ws://localhost:3333`);
 
 const chatDiv = document.getElementById('chat')!;
 const messageInput = document.getElementById('message') as HTMLInputElement;
 const form = document.getElementById('form')! as HTMLFormElement
+
+console.log(`index.js`)
 
 const insertMessageInToDom = (message: string): void => {
 
@@ -27,7 +29,10 @@ function sendMessage(message: string) {
 
 form.addEventListener('submit', event => {
   event.preventDefault()
+  const message = messageInput.value
+  
+  if(message.length < 0) return alert('Mensagem não pode ser vazio')
+  
   sendMessage(messageInput.value)
-
   form.reset()
 })
